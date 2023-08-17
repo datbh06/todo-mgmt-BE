@@ -5,6 +5,7 @@ import com.yugen.todomgmtbe.entity.Todo;
 import com.yugen.todomgmtbe.repository.TodoRepository;
 import com.yugen.todomgmtbe.service.TodoService;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,25 +14,18 @@ public class TodoServiceImpl implements TodoService {
 
     private TodoRepository todoRepository;
 
+    private ModelMapper modelMapper;
+
     @Override
     public TodoDTO add(TodoDTO todoDTO) {
 
-        // Convert TodoDTO to Todo JPA entity
-        Todo todo = new Todo();
-        todo.setTitle(todoDTO.getTitle());
-        todo.setDescription(todoDTO.getDescription());
-        todo.setCompleted(todoDTO.getCompleted());
+        // Convert TodoDTO to Todo JPA entity using ModelMapper
+        Todo todo = modelMapper.map(todoDTO, Todo.class);
 
         // Todo Jpa entity to be saved in the database
         Todo savedTodo = todoRepository.save(todo);
 
         // Convert Todo JPA entity to TodoDTO
-        TodoDTO savedTodoDTO = new TodoDTO();
-        savedTodoDTO.setId(savedTodo.getId());
-        savedTodoDTO.setTitle(savedTodo.getTitle());
-        savedTodoDTO.setDescription(savedTodo.getDescription());
-        savedTodoDTO.setCompleted(savedTodo.getCompleted());
-
-        return savedTodoDTO;
+        return modelMapper.map(savedTodo, TodoDTO.class);
     }
 }
