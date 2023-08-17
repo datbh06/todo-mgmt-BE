@@ -17,6 +17,9 @@ public class TodoServiceImpl implements TodoService {
 
     private ModelMapper modelMapper;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public TodoDTO add(TodoDTO todoDTO) {
 
@@ -30,6 +33,9 @@ public class TodoServiceImpl implements TodoService {
         return modelMapper.map(savedTodo, TodoDTO.class);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public TodoDTO getTodoById(Long id) {
         // Get Todo JPA entity from the database using the id

@@ -7,13 +7,21 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * REST controller for managing Todo items.
+ */
 @RestController
 @RequestMapping("/api/v1/todos")
 @AllArgsConstructor
 public class TodoController {
     private TodoService todoService;
 
-    // Build Add Todo REST API
+    /**
+     * Creates a new Todo item.
+     *
+     * @param todoDTO the Todo item to create
+     * @return the created Todo item
+     */
     @PostMapping("/create")
     public ResponseEntity<TodoDTO> create(@RequestBody TodoDTO todoDTO) {
 
@@ -22,7 +30,12 @@ public class TodoController {
         return new ResponseEntity<>(savedTodoDTO, HttpStatus.CREATED);
     }
 
-    // Build Get Todo REST API by Id
+    /**
+     * Retrieves a Todo item by its id.
+     *
+     * @param id the id of the Todo item to retrieve
+     * @return the retrieved Todo item
+     */
     @GetMapping("/{id}")
     public ResponseEntity<TodoDTO> getTodoById(@PathVariable Long id) {
         TodoDTO todoDTO = todoService.getTodoById(id);
