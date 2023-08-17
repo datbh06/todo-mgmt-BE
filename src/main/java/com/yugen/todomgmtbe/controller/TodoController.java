@@ -54,4 +54,17 @@ public class TodoController {
         List<TodoDTO> todoDTOs = todoService.getAllTodos();
         return ResponseEntity.ok(todoDTOs);
     }
+
+    /**
+     * Updates a Todo item.
+     *
+     * @param id      the id of the Todo item to update
+     * @param todoDTO the Todo item to update
+     * @return the updated Todo item
+     */
+    @PutMapping("/update/{id}")
+    public ResponseEntity<TodoDTO> update(@PathVariable Long id, @RequestBody TodoDTO todoDTO) {
+        TodoDTO updatedTodoDTO = todoService.update(id, todoDTO);
+        return ResponseEntity.ok(updatedTodoDTO);
+    }
 }

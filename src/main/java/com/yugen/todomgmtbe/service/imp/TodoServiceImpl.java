@@ -56,4 +56,24 @@ public class TodoServiceImpl implements TodoService {
         List<Todo> todos = todoRepository.findAll();
         return todos.stream().map(todo -> modelMapper.map(todo, TodoDTO.class)).collect(Collectors.toList());
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public TodoDTO update(Long id, TodoDTO todoDTO) {
+
+        // Get Todo JPA entity from the database using the id
+        Todo todo = todoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Todo not found with id: " + id));
+
+        // Update the Todo JPA entity with the new values from the TodoDTO
+        todo.setTitle(todoDTO.getTitle());
+        todo.setDescription(todoDTO.getDescription());
+        todo.setCompleted(todoDTO.getCompleted());
+
+        // Save the updated Todo JPA entity in the database
+        Todo updatedTodo = todoRepository.save(todo);
+
+        return modelMapper.map(updatedTodo, TodoDTO.class);
+    }
 }

@@ -31,4 +31,13 @@ public interface TodoService {
      * @return the list of all Todo items
      */
     List<TodoDTO> getAllTodos();
+
+    /**
+     * Updates a Todo item.
+     *
+     * @param id      the id of the Todo item to update
+     * @param todoDTO the Todo item to update
+     * @return the updated Todo item
+     */
+    TodoDTO update(Long id, TodoDTO todoDTO);
 }
