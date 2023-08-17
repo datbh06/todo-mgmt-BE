@@ -2,6 +2,8 @@ package com.yugen.todomgmtbe.service;
 
 import com.yugen.todomgmtbe.dto.TodoDTO;
 
+import java.util.List;
+
 /**
  * Service interface for managing Todo items.
  */
@@ -22,4 +24,11 @@ public interface TodoService {
      * @return the retrieved Todo item
      */
     TodoDTO getTodoById(Long id);
+
+    /**
+     * Retrieves all Todo items.
+     *
+     * @return the list of all Todo items
+     */
+    List<TodoDTO> getAllTodos();
 }

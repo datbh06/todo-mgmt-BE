@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * REST controller for managing Todo items.
  */
@@ -40,5 +42,16 @@ public class TodoController {
     public ResponseEntity<TodoDTO> getTodoById(@PathVariable Long id) {
         TodoDTO todoDTO = todoService.getTodoById(id);
         return new ResponseEntity<>(todoDTO, HttpStatus.OK);
+    }
+
+    /**
+     * Retrieves all Todo items.
+     *
+     * @return the list of all Todo items
+     */
+    @GetMapping
+    public ResponseEntity<List<TodoDTO>> getAllTodos() {
+        List<TodoDTO> todoDTOs = todoService.getAllTodos();
+        return ResponseEntity.ok(todoDTOs);
     }
 }
