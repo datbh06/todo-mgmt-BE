@@ -78,4 +78,28 @@ public class TodoController {
         todoService.delete(id);
         return ResponseEntity.ok("Todo task deleted successfully");
     }
+
+    /**
+     * Updates the status completed of a Todo item.
+     *
+     * @param id the id of the Todo item to update
+     * @return the updated  status of Todo item
+     */
+    @PatchMapping("/{id}/completed")
+    public ResponseEntity<TodoDTO> updateStatusCompleted(@PathVariable Long id) {
+        TodoDTO updatedTodoDTO = todoService.updateStatusCompleted(id);
+        return ResponseEntity.ok(updatedTodoDTO);
+    }
+
+    /**
+     * Updates the status uncompleted of a Todo item.
+     *
+     * @param id the id of the Todo item to update
+     * @return the updated  status of Todo item
+     */
+    @PatchMapping("/{id}/uncompleted")
+    public ResponseEntity<TodoDTO> updateStatusUncompleted(@PathVariable Long id) {
+        TodoDTO updatedTodoDTO = todoService.updateStatusUncompleted(id);
+        return ResponseEntity.ok(updatedTodoDTO);
+    }
 }

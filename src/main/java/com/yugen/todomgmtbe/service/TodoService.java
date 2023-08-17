@@ -47,4 +47,20 @@ public interface TodoService {
      * @param id the id of the Todo item to delete
      */
     void delete(Long id);
+
+    /**
+     * Updates the status completed of a Todo item.
+     *
+     * @param id the id of the Todo item to update
+     * @return the updated completed status of Todo item
+     */
+    TodoDTO updateStatusCompleted(Long id);
+
+    /**
+     * Updates the status uncompleted of a Todo item.
+     *
+     * @param id the id of the Todo item to update
+     * @return the updated uncompleted  status of Todo item
+     */
+    TodoDTO updateStatusUncompleted(Long id);
 }
