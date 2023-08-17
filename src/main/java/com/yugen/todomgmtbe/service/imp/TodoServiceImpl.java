@@ -76,4 +76,17 @@ public class TodoServiceImpl implements TodoService {
 
         return modelMapper.map(updatedTodo, TodoDTO.class);
     }
+
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void delete(Long id) {
+        // Get Todo JPA entity from the database using the id
+        Todo todo = todoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Todo not found with id: " + id));
+
+        // Delete the Todo JPA entity from the database
+        todoRepository.delete(todo);
+    }
 }

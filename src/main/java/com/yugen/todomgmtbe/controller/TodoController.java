@@ -67,4 +67,15 @@ public class TodoController {
         TodoDTO updatedTodoDTO = todoService.update(id, todoDTO);
         return ResponseEntity.ok(updatedTodoDTO);
     }
+
+    /**
+     * Deletes a Todo item.
+     *
+     * @param id the id of the Todo item to delete
+     */
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> delete(@PathVariable Long id) {
+        todoService.delete(id);
+        return ResponseEntity.ok("Todo task deleted successfully");
+    }
 }

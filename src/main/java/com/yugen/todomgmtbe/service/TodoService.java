@@ -40,4 +40,11 @@ public interface TodoService {
      * @return the updated Todo item
      */
     TodoDTO update(Long id, TodoDTO todoDTO);
+
+    /**
+     * Deletes a Todo item.
+     *
+     * @param id the id of the Todo item to delete
+     */
+    void delete(Long id);
 }
