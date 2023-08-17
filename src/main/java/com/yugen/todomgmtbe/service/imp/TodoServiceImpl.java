@@ -2,6 +2,7 @@ package com.yugen.todomgmtbe.service.imp;
 
 import com.yugen.todomgmtbe.dto.TodoDTO;
 import com.yugen.todomgmtbe.entity.Todo;
+import com.yugen.todomgmtbe.exception.ResourceNotFoundException;
 import com.yugen.todomgmtbe.repository.TodoRepository;
 import com.yugen.todomgmtbe.service.TodoService;
 import lombok.AllArgsConstructor;
@@ -27,5 +28,12 @@ public class TodoServiceImpl implements TodoService {
 
         // Convert Todo JPA entity to TodoDTO
         return modelMapper.map(savedTodo, TodoDTO.class);
+    }
+
+    @Override
+    public TodoDTO getTodoById(Long id) {
+        // Get Todo JPA entity from the database using the id
+        Todo todo = todoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Todo not found with id: " + id));
+        return modelMapper.map(todo, TodoDTO.class);
     }
 }

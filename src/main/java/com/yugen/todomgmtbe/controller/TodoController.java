@@ -5,10 +5,7 @@ import com.yugen.todomgmtbe.service.TodoService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/todos")
@@ -16,11 +13,19 @@ import org.springframework.web.bind.annotation.RestController;
 public class TodoController {
     private TodoService todoService;
 
+    // Build Add Todo REST API
     @PostMapping("/create")
     public ResponseEntity<TodoDTO> create(@RequestBody TodoDTO todoDTO) {
 
         TodoDTO savedTodoDTO = todoService.add(todoDTO);
 
         return new ResponseEntity<>(savedTodoDTO, HttpStatus.CREATED);
+    }
+
+    // Build Get Todo REST API by Id
+    @GetMapping("/{id}")
+    public ResponseEntity<TodoDTO> getTodoById(@PathVariable Long id) {
+        TodoDTO todoDTO = todoService.getTodoById(id);
+        return new ResponseEntity<>(todoDTO, HttpStatus.OK);
     }
 }
