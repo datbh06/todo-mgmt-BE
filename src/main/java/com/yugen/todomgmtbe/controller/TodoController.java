@@ -12,6 +12,7 @@ import java.util.List;
 /**
  * REST controller for managing Todo items.
  */
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/v1/todos")
 @AllArgsConstructor
