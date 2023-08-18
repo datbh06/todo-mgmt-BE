@@ -5,6 +5,7 @@ import com.yugen.todomgmtbe.service.TodoService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class TodoController {
      * @param todoDTO the Todo item to create
      * @return the created Todo item
      */
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<TodoDTO> create(@RequestBody TodoDTO todoDTO) {
 
@@ -39,6 +41,8 @@ public class TodoController {
      * @param id the id of the Todo item to retrieve
      * @return the retrieved Todo item
      */
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+
     @GetMapping("/{id}")
     public ResponseEntity<TodoDTO> getTodoById(@PathVariable Long id) {
         TodoDTO todoDTO = todoService.getTodoById(id);
@@ -50,6 +54,8 @@ public class TodoController {
      *
      * @return the list of all Todo items
      */
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+
     @GetMapping
     public ResponseEntity<List<TodoDTO>> getAllTodos() {
         List<TodoDTO> todoDTOs = todoService.getAllTodos();
@@ -63,6 +69,7 @@ public class TodoController {
      * @param todoDTO the Todo item to update
      * @return the updated Todo item
      */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/update/{id}")
     public ResponseEntity<TodoDTO> update(@PathVariable Long id, @RequestBody TodoDTO todoDTO) {
         TodoDTO updatedTodoDTO = todoService.update(id, todoDTO);
@@ -74,6 +81,7 @@ public class TodoController {
      *
      * @param id the id of the Todo item to delete
      */
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) {
         todoService.delete(id);
@@ -86,6 +94,7 @@ public class TodoController {
      * @param id the id of the Todo item to update
      * @return the updated  status of Todo item
      */
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PatchMapping("/{id}/completed")
     public ResponseEntity<TodoDTO> updateStatusCompleted(@PathVariable Long id) {
         TodoDTO updatedTodoDTO = todoService.updateStatusCompleted(id);
@@ -98,6 +107,7 @@ public class TodoController {
      * @param id the id of the Todo item to update
      * @return the updated  status of Todo item
      */
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PatchMapping("/{id}/uncompleted")
     public ResponseEntity<TodoDTO> updateStatusUncompleted(@PathVariable Long id) {
         TodoDTO updatedTodoDTO = todoService.updateStatusUncompleted(id);
