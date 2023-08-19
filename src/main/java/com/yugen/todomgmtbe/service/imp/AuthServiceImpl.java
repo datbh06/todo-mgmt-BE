@@ -1,5 +1,6 @@
 package com.yugen.todomgmtbe.service.imp;
 
+import com.yugen.todomgmtbe.dto.LoginDto;
 import com.yugen.todomgmtbe.dto.RegisterDto;
 import com.yugen.todomgmtbe.entity.Role;
 import com.yugen.todomgmtbe.entity.User;
@@ -9,6 +10,10 @@ import com.yugen.todomgmtbe.repository.UserRepository;
 import com.yugen.todomgmtbe.service.AuthService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +30,7 @@ public class AuthServiceImpl implements AuthService {
     private UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
     private RoleRepository roleRepository;
+    private AuthenticationManager authenticationManager;
 
     /**
      * {@inheritDoc}
@@ -56,5 +62,18 @@ public class AuthServiceImpl implements AuthService {
 
         userRepository.save(user);
         return "User registered successfully";
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String login(LoginDto loginDto) {
+
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDto.getUsernameOrEmail(), loginDto.getPassword()));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        return "User logged in successfully";
     }
 }

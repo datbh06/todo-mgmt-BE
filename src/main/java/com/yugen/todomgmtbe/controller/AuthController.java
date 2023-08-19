@@ -1,5 +1,6 @@
 package com.yugen.todomgmtbe.controller;
 
+import com.yugen.todomgmtbe.dto.LoginDto;
 import com.yugen.todomgmtbe.dto.RegisterDto;
 import com.yugen.todomgmtbe.service.AuthService;
 import lombok.AllArgsConstructor;
@@ -29,5 +30,17 @@ public class AuthController {
     public ResponseEntity<String> register(@RequestBody RegisterDto registerDto) {
         String response = authService.register(registerDto);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+    /**
+     * Logs in a user.
+     *
+     * @param loginDto the login data transfer object
+     * @return a ResponseEntity object containing the result of the login
+     */
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody LoginDto loginDto) {
+        String response = authService.login(loginDto);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
