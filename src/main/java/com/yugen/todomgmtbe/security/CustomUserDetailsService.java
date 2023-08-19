@@ -13,12 +13,22 @@ import org.springframework.stereotype.Service;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * This class represents a custom implementation of the UserDetailsService interface for managing user authentication.
+ */
 @Service
 @AllArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
 
     private UserRepository userRepository;
 
+    /**
+     * Loads a user by their username or email.
+     *
+     * @param usernameOrEmail the username or email of the user
+     * @return the UserDetails object representing the user
+     * @throws UsernameNotFoundException if the user is not found by their username or email
+     */
     @Override
     public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
 

@@ -8,8 +8,18 @@ import org.springframework.web.context.request.WebRequest;
 
 import java.time.LocalDateTime;
 
+/**
+ * This class represents a global exception handler for the TodoAPI.
+ */
 @ControllerAdvice
 public class GlobalExceptionHandler {
+    /**
+     * Handles TodoAPIException exceptions.
+     *
+     * @param ex      the TodoAPIException exception
+     * @param request the WebRequest object
+     * @return a ResponseEntity object containing the error details
+     */
     @ExceptionHandler(TodoAPIException.class)
     public ResponseEntity<ErrorDetails> handleTodoAPIException(TodoAPIException ex, WebRequest request) {
         ErrorDetails errorDetail = new ErrorDetails(

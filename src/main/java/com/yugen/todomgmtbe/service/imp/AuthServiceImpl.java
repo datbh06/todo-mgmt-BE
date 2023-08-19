@@ -15,6 +15,9 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * This class represents the service layer implementation for managing authentication.
+ */
 @Service
 @AllArgsConstructor
 public class AuthServiceImpl implements AuthService {
@@ -23,6 +26,9 @@ public class AuthServiceImpl implements AuthService {
     private PasswordEncoder passwordEncoder;
     private RoleRepository roleRepository;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String register(RegisterDto registerDto) {
 
