@@ -27,6 +27,6 @@ To use the application, simply register for an account as a normal user or log i
 
 ## Running the Project
 1. Clone the repository or download the source code of the project.
-2. Navigate to the root directory of the project and run the server side of the application
-3. navigate to the client-side directory of the project by following this link: [https://github.com/datbh06/todo-mgmt-FE]. Run the following command to install the dependencies and start the client side of the application:
+2. Navigate to the root directory of the project and run the server side of the application (Using the command: mvn spring-boot:run or import and run on your IDE)
+3. Navigate to the client-side directory of the project by following this link: [https://github.com/datbh06/todo-mgmt-FE]. Run the following command to install the dependencies and start the client side of the application:
 4. Open your web browser and navigate to `http://localhost:3000` to access the application.
