@@ -1,6 +1,5 @@
 package com.yugen.todomgmtbe.controller;
 
-import com.fasterxml.jackson.databind.node.POJONode;
 import com.yugen.todomgmtbe.dto.RegisterDto;
 import com.yugen.todomgmtbe.service.AuthService;
 import lombok.AllArgsConstructor;

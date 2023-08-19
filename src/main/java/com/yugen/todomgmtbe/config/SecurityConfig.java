@@ -29,12 +29,10 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        http.csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests((authorize) -> {
-            authorize.requestMatchers(HttpMethod.GET, "/api/**").permitAll();
-            authorize.requestMatchers("/api/v1/auth/**").permitAll();
+        http.csrf().disable().authorizeHttpRequests((authorize) -> {
+            authorize.requestMatchers("/api/auth/**").permitAll();
             authorize.anyRequest().authenticated();
         }).httpBasic(Customizer.withDefaults());
-
         return http.build();
     }
 

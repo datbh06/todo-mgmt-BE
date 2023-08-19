@@ -36,10 +36,10 @@ public class TodoController {
     }
 
     /**
-     * Retrieves a Todo item by its id.
+     * Retrieves a task item by its id.
      *
-     * @param id the id of the Todo item to retrieve
-     * @return the retrieved Todo item
+     * @param id the id of the task item to retrieve
+     * @return the retrieved task item
      */
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @GetMapping("/{id}")
