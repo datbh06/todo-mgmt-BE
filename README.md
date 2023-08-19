@@ -13,13 +13,20 @@ This is a web-based todo management application built using Spring Boot and Reac
 
 To use the application, simply register for an account as a normal user or log in as an admin user. Once logged in, you can manage your todo tasks by marking them as complete or pending. If you are an admin user, you can also add, update, and delete tasks.
 
-## Running the Project
+## Tools and Technologies Used
 
-1. Make sure you have the following software installed on your computer:
-    - Java Development Kit (JDK)
-    - Maven
-    - Node.js
-2. Clone the repository or download the source code of the project.
-3. Navigate to the root directory of the project and run the server side of the application
-4. navigate to the client-side directory of the project by following this link: [https://github.com/datbh06/todo-mgmt-FE]. Run the following command to install the dependencies and start the client side of the application:
-5. Open your web browser and navigate to `http://localhost:3000` to access the application.
+### Server-side:
+
+- **Java 17+**
+- **Spring Boot 3+**
+- **Spring Data JPA (Hibernate)**
+- **Maven**
+- **IntelliJ IDEA**
+- **MySQL database**
+- **Postman**
+
+## Running the Project
+1. Clone the repository or download the source code of the project.
+2. Navigate to the root directory of the project and run the server side of the application
+3. navigate to the client-side directory of the project by following this link: [https://github.com/datbh06/todo-mgmt-FE]. Run the following command to install the dependencies and start the client side of the application:
+4. Open your web browser and navigate to `http://localhost:3000` to access the application.
