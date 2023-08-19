@@ -1,5 +1,7 @@
 package com.yugen.todomgmtbe.config;
 
+import com.yugen.todomgmtbe.security.JwtAuthenticationEntryPoint;
+import com.yugen.todomgmtbe.security.JwtAuthenticationFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
  * This class represents the security configuration for the TodoAPI.
@@ -22,6 +25,12 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableMethodSecurity
 @AllArgsConstructor
 public class SecurityConfig {
+
+    private UserDetailsService userDetailsService;
+
+    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
 
     /**
      * Configures the security filter chain.
@@ -32,12 +41,23 @@ public class SecurityConfig {
      */
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
+        // Disable CSRF (cross site request forgery) and enable CORS (cross-origin resource sharing)
         http.csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests((authorize) -> {
             authorize.requestMatchers("/api/v1/auth/**").permitAll();
             authorize.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll();
             authorize.anyRequest().authenticated();
         }).httpBasic(Customizer.withDefaults());
+
+        // Add JWT based authentication filter
+        // to validate tokens with every request before other filters to avoid unnecessary overheads
+        http.exceptionHandling((exceptionHandling) -> {
+            exceptionHandling.authenticationEntryPoint(jwtAuthenticationEntryPoint);
+        });
+
+        // Add JWT token filter after UsernamePasswordAuthenticationFilter to validate tokens with every request
+        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
+
         return http.build();
     }
 
