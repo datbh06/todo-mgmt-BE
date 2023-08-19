@@ -6,14 +6,12 @@ import com.yugen.todomgmtbe.service.AuthService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * This class represents the REST controller for managing authentication.
  */
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/v1/auth")
 @AllArgsConstructor
