@@ -7,6 +7,7 @@ import com.yugen.todomgmtbe.entity.User;
 import com.yugen.todomgmtbe.exception.TodoAPIException;
 import com.yugen.todomgmtbe.repository.RoleRepository;
 import com.yugen.todomgmtbe.repository.UserRepository;
+import com.yugen.todomgmtbe.security.JwtTokenProvider;
 import com.yugen.todomgmtbe.service.AuthService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -31,6 +32,7 @@ public class AuthServiceImpl implements AuthService {
     private PasswordEncoder passwordEncoder;
     private RoleRepository roleRepository;
     private AuthenticationManager authenticationManager;
+    private JwtTokenProvider jwtTokenProvider;
 
     /**
      * {@inheritDoc}
@@ -70,10 +72,13 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public String login(LoginDto loginDto) {
 
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDto.getUsernameOrEmail(), loginDto.getPassword()));
+        Authentication authentication =
+                authenticationManager.authenticate(
+                        new UsernamePasswordAuthenticationToken(
+                                loginDto.getUsernameOrEmail(), loginDto.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        return "User logged in successfully";
+        return jwtTokenProvider.generateToken(authentication);
     }
 }

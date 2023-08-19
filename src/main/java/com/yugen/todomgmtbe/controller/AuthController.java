@@ -1,5 +1,6 @@
 package com.yugen.todomgmtbe.controller;
 
+import com.yugen.todomgmtbe.dto.JwtAuthResponse;
 import com.yugen.todomgmtbe.dto.LoginDto;
 import com.yugen.todomgmtbe.dto.RegisterDto;
 import com.yugen.todomgmtbe.service.AuthService;
@@ -31,14 +32,19 @@ public class AuthController {
     }
 
     /**
-     * Logs in a user.
+     * This method handles user login requests.
      *
-     * @param loginDto the login data transfer object
-     * @return a ResponseEntity object containing the result of the login
+     * @param loginDto A LoginDto object containing the user's login credentials.
+     * @return A ResponseEntity containing a JwtAuthResponse object with the generated access token.
      */
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginDto loginDto) {
-        String response = authService.login(loginDto);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+    public ResponseEntity<JwtAuthResponse> login(@RequestBody LoginDto loginDto) {
+        String token = authService.login(loginDto);
+
+        JwtAuthResponse jwtAuthResponse = new JwtAuthResponse();
+        jwtAuthResponse.setAccessToken(token);
+
+        return new ResponseEntity<>(jwtAuthResponse, HttpStatus.OK);
     }
+
 }
