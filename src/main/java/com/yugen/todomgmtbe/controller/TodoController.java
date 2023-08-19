@@ -41,8 +41,7 @@ public class TodoController {
      * @param id the id of the Todo item to retrieve
      * @return the retrieved Todo item
      */
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
-
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @GetMapping("/{id}")
     public ResponseEntity<TodoDTO> getTodoById(@PathVariable Long id) {
         TodoDTO todoDTO = todoService.getTodoById(id);
@@ -54,8 +53,7 @@ public class TodoController {
      *
      * @return the list of all Todo items
      */
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
-
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @GetMapping
     public ResponseEntity<List<TodoDTO>> getAllTodos() {
         List<TodoDTO> todoDTOs = todoService.getAllTodos();
@@ -69,7 +67,7 @@ public class TodoController {
      * @param todoDTO the Todo item to update
      * @return the updated Todo item
      */
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/update/{id}")
     public ResponseEntity<TodoDTO> update(@PathVariable Long id, @RequestBody TodoDTO todoDTO) {
         TodoDTO updatedTodoDTO = todoService.update(id, todoDTO);
@@ -94,7 +92,7 @@ public class TodoController {
      * @param id the id of the Todo item to update
      * @return the updated  status of Todo item
      */
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @PatchMapping("/{id}/completed")
     public ResponseEntity<TodoDTO> updateStatusCompleted(@PathVariable Long id) {
         TodoDTO updatedTodoDTO = todoService.updateStatusCompleted(id);
@@ -107,7 +105,7 @@ public class TodoController {
      * @param id the id of the Todo item to update
      * @return the updated  status of Todo item
      */
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @PatchMapping("/{id}/uncompleted")
     public ResponseEntity<TodoDTO> updateStatusUncompleted(@PathVariable Long id) {
         TodoDTO updatedTodoDTO = todoService.updateStatusUncompleted(id);
