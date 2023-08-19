@@ -26,7 +26,13 @@ To use the application, simply register for an account as a normal user or log i
 - **Postman**
 
 ## Running the Project
-1. Clone the repository or download the source code of the project.
-2. Navigate to the root directory of the project and run the server side of the application (Using the command: mvn spring-boot:run or import and run on your IDE)
-3. Navigate to the client-side directory of the project by following this link: [https://github.com/datbh06/todo-mgmt-FE]. Run the following command to install the dependencies and start the client side of the application:
-4. Open your web browser and navigate to `http://localhost:3000` to access the application.
+1. Make sure you have the following software installed on your computer:
+    - Java Development Kit (JDK)
+    - Maven
+    - Node.js
+2. Clone the repository or download the source code of the project.
+3. Create a MySQL database and configure the `application.properties` file in the `src/main/resources` directory of the project
+based on your database configuration, by adding .env file following format in .env.example file
+4. Navigate to the root directory of the project and run the server side of the application (Using the command: mvn spring-boot:run or import and run on your IDE)
+5. Navigate to the client-side directory of the project by following this link: [https://github.com/datbh06/todo-mgmt-FE]. Run the following command to install the dependencies and start the client side of the application:
+6. Open your web browser and navigate to `http://localhost:3000` to access the application.
