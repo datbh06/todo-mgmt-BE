@@ -1,5 +1,6 @@
 package com.yugen.todomgmtbe.service;
 
+import com.yugen.todomgmtbe.dto.JwtAuthResponse;
 import com.yugen.todomgmtbe.dto.LoginDto;
 import com.yugen.todomgmtbe.dto.RegisterDto;
 
@@ -22,5 +23,5 @@ public interface AuthService {
      * @param loginDto the login data transfer object
      * @return a string representing the result of the login
      */
-    String login(LoginDto loginDto);
+    JwtAuthResponse login(LoginDto loginDto);
 }

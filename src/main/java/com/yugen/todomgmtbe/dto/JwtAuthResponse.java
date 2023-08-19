@@ -22,4 +22,9 @@ public class JwtAuthResponse {
      * The token type.
      */
     private final String tokenType = "Bearer";
+
+    /**
+     * The user's role.
+     */
+    private String role;
 }

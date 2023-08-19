@@ -1,5 +1,6 @@
 package com.yugen.todomgmtbe.service.imp;
 
+import com.yugen.todomgmtbe.dto.JwtAuthResponse;
 import com.yugen.todomgmtbe.dto.LoginDto;
 import com.yugen.todomgmtbe.dto.RegisterDto;
 import com.yugen.todomgmtbe.entity.Role;
@@ -19,6 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -70,15 +72,31 @@ public class AuthServiceImpl implements AuthService {
      * {@inheritDoc}
      */
     @Override
-    public String login(LoginDto loginDto) {
+    public JwtAuthResponse login(LoginDto loginDto) {
 
-        Authentication authentication =
-                authenticationManager.authenticate(
-                        new UsernamePasswordAuthenticationToken(
-                                loginDto.getUsernameOrEmail(), loginDto.getPassword()));
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDto.getUsernameOrEmail(), loginDto.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        return jwtTokenProvider.generateToken(authentication);
+        String token = jwtTokenProvider.generateToken(authentication);
+
+        Optional<User> userOptional = userRepository.findByUsernameOrEmail(loginDto.getUsernameOrEmail(), loginDto.getUsernameOrEmail());
+
+        String role = null;
+
+        if (userOptional.isPresent()) {
+            User loggedInUser = userOptional.get();
+            Optional<Role> roleOptional = loggedInUser.getRoles().stream().findFirst();
+
+            if (roleOptional.isPresent()) {
+                Role userRole = roleOptional.get();
+                role = userRole.getName();
+            }
+        }
+
+        JwtAuthResponse jwtAuthResponse = new JwtAuthResponse();
+        jwtAuthResponse.setAccessToken(token);
+        jwtAuthResponse.setRole(role);
+        return jwtAuthResponse;
     }
 }
