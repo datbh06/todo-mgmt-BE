@@ -12,8 +12,8 @@ APIs using Spring Security and JSON Web Tokens (JWT).
   using JWT.
 - **Decentralization**: The application has been decentralized into normal users and admin users.
     - ***Normal users can register for an account, log in, and mark todo tasks as complete or pending.***
-    -
-    ***Admin users have all the permissions of normal users, as well as the ability to add, update, and delete tasks.***
+    - ***Admin users have all the permissions of normal users, as well as the ability to add, update, and delete
+      tasks.***
 
 ## Usage
 
