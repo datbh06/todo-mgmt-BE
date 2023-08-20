@@ -5,9 +5,11 @@ This is a web-based todo management application built using Spring Boot and Reac
 ## Features
 
 - **Server-side**: The server-side of the application is built using Spring Boot and provides secure REST APIs using Spring Security.
+- **Client-side**: https://github.com/datbh06/todo-mgmt-FE 
 - **Register and Login**: The application provides REST APIs for user registration and login. These APIs are secured using JWT.
-- **Client-side**: The client-side of the application is built using React and implements the register and login features.
-- **Decentralization**: The application has been decentralized into normal users and admin users. Normal users can register for an account, log in, and mark todo tasks as complete or pending. Admin users have all the permissions of normal users, as well as the ability to add, update, and delete tasks.
+- **Decentralization**: The application has been decentralized into normal users and admin users.
+  - ***Normal users can register for an account, log in, and mark todo tasks as complete or pending.***
+  - ***Admin users have all the permissions of normal users, as well as the ability to add, update, and delete tasks.***
 
 ## Usage
 
